@@ -51,6 +51,7 @@
     "file-loader": "^0.8.5",
     "ghooks": "^1.0.1",
     "gulp": "^3.9.0",
+	"gulp-replace": "^0.5.4",
     "gulp-rimraf": "^0.2.0",
     "gulp-typescript": "^2.10.0",
     "hammerjs": "^2.0.6",

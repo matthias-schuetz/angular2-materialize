@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var replace = require('gulp-replace');
 var rimraf = require('gulp-rimraf');
 var runSequence = require('run-sequence');
 var tsc = require('gulp-typescript');
@@ -33,6 +34,10 @@ gulp.task('cleanup', function () {
     return gulp.src(paths.toDelete, {read: false}).pipe(rimraf({force: true}));
 });
 
+gulp.task('fix-systemjs-register', function () {
+    return gulp.src('./dist/materialize-directive.js').pipe(replace("['@angular/core']", "'angular2-materialize', ['@angular/core']")).pipe(gulp.dest(paths.dist));
+});
+
 // entry point - run tasks in a sequence
 gulp.task('default', function (callback) {
     runSequence(
@@ -41,6 +46,7 @@ gulp.task('default', function (callback) {
         'tsc',
         'copy',
         'cleanup',
+		'fix-systemjs-register',
         function (error) {
             if (error) {
                 console.log(error.message);
